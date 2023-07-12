@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> findUnion(const vector<int>& A, const vector<int>& B) {
+    vector<int> Union;
+    int i = 0; 
+    int j = 0;  
+
+    while (i < A.size() && j < B.size()) {
+        if (A[i] < B[j]) {
+            Union.push_back(A[i]);
+            i++;
+        } else if (A[i] > B[j]) {
+            Union.push_back(B[j]);
+            j++;
+        } else { 
+            Union.push_back(A[i]);
+            i++;
+            j++;
+        }
+    }
+    while (i < A.size()) {
+        Union.push_back(A[i]);
+        i++;
+    }
+    while (j < B.size()) {
+        Union.push_back(B[j]);
+        j++;
+    }
+    
+    return Union;
+}
+vector<int> findIntersection(const vector<int>& A, const vector<int>& B) {
+    vector<int> Intersection;
+    int i = 0;  
+    int j = 0;  
+
+    while (i < A.size() && j < B.size()) {
+        if (A[i] < B[j]) {
+            i++;
+        } else if (A[i] > B[j]) {
+            j++;
+        } else {  
+            Intersection.push_back(A[i]);
+            i++;
+            j++;
+        }
+    }
+    
+    return Intersection;
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t-->0){
+        int m,n;
+        cin>>m>>n;
+        vector<int> A(m);
+        vector<int> B(n);
+        for (int i =0 ;i<m;i++){
+            cin>>A[i];
+        }
+        for (int i =0 ;i<n;i++){
+            cin>>B[i];
+        }
+        sort(A.begin(),A.end());
+        sort(B.begin(),B.end());
+        vector<int> Union = findUnion(A, B);
+        vector<int> Intersection = findIntersection(A, B);
+        
+        for (int i = 0; i < Union.size(); i++) {
+            cout << Union[i] << " ";
+        }
+        cout << endl;
+        for (int i = 0; i < Intersection.size(); i++) {
+            cout << Intersection[i] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
