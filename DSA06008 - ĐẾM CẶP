@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dem(int x, int Y[], int m, int kqY[]){
+    if (x == 0)
+        return 0;
+    if (x == 1)
+        return kqY[0];
+    int* idx = upper_bound(Y, Y + m, x);
+    int ans = (Y + m) - idx;
+    ans += (kqY[0] + kqY[1]);
+    if (x == 2)
+        ans -= (kqY[3] + kqY[4]);
+    if (x == 3)
+        ans += kqY[2];
+ 
+    return ans;
+}
+int demKQ(int X[], int Y[], int n, int m){
+    int kqY[5] = { 0 };
+    for (int i = 0; i < m; i++)
+        if (Y[i] < 5)
+            kqY[Y[i]]++;
+    sort(Y, Y + m);
+	int d = 0; 
+    for (int i = 0; i < n; i++)
+        d += dem(X[i], Y, m, kqY);
+        return d;
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+    	int n,m,i,j;
+    	cin>>n>>m;
+    	int X[n],Y[m];
+    	for(i=0;i<n;i++) cin>>X[i];
+    	for(i=0;i<m;i++) cin>>Y[i];
+    	cout << demKQ(X, Y, n, m);
+    	cout<<endl;
+	}
+}
