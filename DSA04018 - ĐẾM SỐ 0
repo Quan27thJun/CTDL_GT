@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+// Hàm đếm số lượng số 0 trong mảng A[]
+int count_zeros(int arr[], int n) {
+    int left = 0;
+    int right = n - 1;
+    int result = -1;
+
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (arr[mid] == 0) {
+            result = mid;
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+
+    return result + 1;
+}
+
+int main() {
+    int T;
+    cin >> T; // Đọc số lượng bộ test
+
+    while (T--) {
+        int N;
+        cin >> N; // Đọc số lượng phần tử trong mảng
+        int arr[1000];
+        for (int i = 0; i < N; i++) {
+            cin >> arr[i]; // Đọc mảng A[]
+        }
+        
+        int count = count_zeros(arr, N);
+        cout << count << endl;
+    }
+
+    return 0;
+}
