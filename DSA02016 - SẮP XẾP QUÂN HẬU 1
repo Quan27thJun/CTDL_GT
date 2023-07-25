@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+int H[11], n,dem;
+bool C[11], DCXUOI[22], DCNGUOC[22];
+void In(){
+	cin>>n;
+	for(int i=1; i<=n; i++){
+		C[i]=true;
+		}
+	for(int i=1; i<2*n; i++){ 
+		DCXUOI[i]=true; 
+		DCNGUOC[i]=true; 
+	} 
+}
+void Try(int i){ 
+	for (int j=1; j<=n; j++){ 
+		if( C[j] && DCXUOI[i-j+n] && DCNGUOC[i+j-1]){
+			H[i]=j;
+			C[j] = false;
+			DCXUOI[i-j+n]=false; 
+			DCNGUOC[i+j-1]=false;
+			if(i==n) {
+				dem++;
+			}
+			else Try(i+1); 
+			C[j] = true; 
+			DCXUOI[i-j+n]=true;
+			DCNGUOC[i+j-1]=true; 
+		}
+	}
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		dem=0;
+		In(); 
+		Try(1);
+		cout<<dem;
+		cout<<endl; 
+	}
+}
+
