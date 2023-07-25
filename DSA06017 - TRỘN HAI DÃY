@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t,n,m;
+    cin>>t;
+    while(t-->0){
+        cin>>n>>m;
+        long long a[n],b[m],c[n+m];
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        for(int i=0;i<m;i++){
+            cin>>b[i];
+        }
+        for(int i=0;i<n;i++){
+            c[i]=a[i];
+        }
+        for(int i=0;i<m;i++){
+            c[n+i]=b[i];
+        }
+        sort(c,c+n+m);
+        for(int i=0;i<n+m;i++){
+            cout<<c[i]<<" ";
+        }
+        cout<<endl;
+    }
+}
