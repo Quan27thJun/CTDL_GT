@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+char c, a[50];
+int n, k, pos = -1;
+void Try(int i)
+{
+    for (int j = 0; j <= k; ++j)
+        if (j >= pos)
+        {
+            a[i] = j + 'A';
+            pos = j;
+            if (i == n)
+            {
+                for (int h = 1; h <= n; ++h)
+                    cout << a[h];
+                cout << endl;
+            }
+            else
+                Try(i + 1);
+            pos = -1;
+        }
+}
+int main()
+{
+    cin >> c >> n;
+    k = c - 'A';
+    Try(1);
+}
