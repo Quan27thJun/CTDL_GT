@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int N, K;
+vector<int> A;
+vector<int> result;
+vector<bool> visited;
+void PrintResult() {
+    for (int i = 0; i < K; i++) {
+        cout << result[i] << " ";
+    }
+    cout << endl;
+}
+void Try(int idx, int count) {
+    if (count == K) {
+        PrintResult();
+        return;
+    }
+    for (int i = idx; i < N; i++) {
+        if (!visited[i] && (result.empty() || A[i] > result.back())) {
+            visited[i] = true;
+            result.push_back(A[i]);
+            Try(i + 1, count + 1);
+            visited[i] = false;
+            while (i + 1 < N && A[i] == A[i + 1]) {
+                i++;
+            }
+            result.pop_back();
+        }
+    }
+}
+int main() {
+    cin >> N >> K;
+    A.resize(N);
+    visited.assign(N, false);
+    for (int i = 0; i < N; i++) {
+        cin >> A[i];
+    }
+    sort(A.begin(), A.end());
+    Try(0, 0);
+    return 0;
+}
