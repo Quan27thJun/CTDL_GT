@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int fibMonaccianSearch(vector<int>& A, int x) {
+    int n = A.size();
+    int fibM2 = 0; // fib(m-2)
+    int fibM1 = 1; // fib(m-1)
+    int fibM = fibM2 + fibM1; // fib(m)
+    
+    while (fibM < n) {
+        fibM2 = fibM1;
+        fibM1 = fibM;
+        fibM = fibM2 + fibM1;
+    }
+    
+    int offset = -1;
+    
+    while (fibM > 1) {
+        int i = min(offset + fibM2, n - 1);
+        
+        if (A[i] < x) {
+            fibM = fibM1;
+            fibM1 = fibM2;
+            fibM2 = fibM - fibM1;
+            offset = i;
+        } else if (A[i] > x) {
+            fibM = fibM2;
+            fibM1 = fibM1 - fibM2;
+            fibM2 = fibM - fibM1;
+        } else {
+            return i;
+        }
+    }
+    
+    return -1;
+}
+
+int findMaxFrequency(vector<int>& A) {
+    int N = A.size();
+    sort(A.begin(), A.end()); // Sắp xếp mảng A[]
+
+    int maxFreq = 1; // Tần số xuất hiện lớn nhất
+    int curFreq = 1; // Tần số xuất hiện hiện tại
+    int maxFreqNum = A[0]; // Số có tần số xuất hiện lớn nhất
+    int curNum = A[0]; // Số hiện tại
+
+    for (int i = 1; i < N; i++) {
+        if (A[i] == A[i - 1]) {
+            curFreq++;
+        } else {
+            curFreq = 1;
+            curNum = A[i];
+        }
+
+        if (curFreq > maxFreq) {
+            maxFreq = curFreq;
+            maxFreqNum = curNum;
+        }
+    }
+
+    if (maxFreq > N / 2) {
+        return maxFreqNum;
+    } else {
+        return -1;
+    }
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int N;
+        cin >> N;
+        vector<int> A(N);
+        for (int i = 0; i < N; i++) {
+            cin >> A[i];
+        }
+
+        int result = findMaxFrequency(A);
+        if (result != -1) {
+            cout << result << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
