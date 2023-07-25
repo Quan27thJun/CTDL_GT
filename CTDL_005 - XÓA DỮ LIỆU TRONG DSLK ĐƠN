@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+// Định nghĩa cấu trúc Node để tạo danh sách liên kết đơn
+struct Node {
+    int data;
+    Node* next;
+    Node(int x){
+        data=x;
+        next=NULL;
+    } 
+};
+int deleteElements(Node* &head, int x) {
+    Node* c = head;              //khoi tao con tro hien tai la o dau danh sach
+    Node* p = nullptr;           //khoi tao con tro truoc do là null(khong co note nao truoc note hien tai)
+    int count = 0;
+
+    while (c != nullptr) {       //lap cho den phan tu cuoi cung
+        if (c->data == x) {      //neu note hien tai bang x
+            Node* temp = c;      //luu tru note hien tai bang temp
+            c = c->next;         //di chuyen den note tiep theo
+            if (p != nullptr) {  //neu note truoc not hien tai khong phai la null
+                p->next = c;     //thi cap nhat con tro next của p de bo qua node hien tai
+            } else {             //neu note ht là dau danh sach(p la nullptr),
+                head = c;        //cap nhat con tro head de bo qua node ht 
+            }
+            delete temp;
+            count++;
+        } else {                 //neu note ht khong bang x
+            p = c;               //cap nhat note truoc bang note hien tai
+            c = c->next;         //di chuyen note hien tai den note tiep theo
+        }
+    }
+    return count;
+}
+void printList(Node* head) {
+    Node* c = head;
+    while (c != nullptr) {
+        cout << c->data << " ";
+        c = c->next;
+    }
+}
+void append(Node* &head, int x) {
+    Node* newNode = new Node(x);
+    if (head == nullptr) {
+        head = newNode;
+    } else {
+        Node* c = head;
+        while (c->next != nullptr) {
+            c = c->next;
+        }
+        c->next = newNode;
+    }
+}
+int main() {
+    int N;
+    cin >> N;
+    Node* First = nullptr;
+    for (int i = 0; i < N; i++) {
+        int num;
+        cin >> num;
+        append(First, num);
+    }
+    int x;
+    cin >> x;
+    int deletedCount = deleteElements(First, x);
+    printList(First);
+    return 0;
+}
