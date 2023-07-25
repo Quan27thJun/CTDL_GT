@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+int ok=0;
+void sinh(int a[],int n,int k) {
+    for(int i=k;i>0;i--){
+        if(a[i]!=n-k+i){
+            a[i]=a[i]+1;
+            ok=1;
+            for(int j=i+1;j<=k;j++){
+                a[j]=a[i]+j-i;
+            }
+            break;
+        } else {
+            ok=0;
+        }
+    }
+    if(ok==1){
+        for(int i=1;i<=k;i++){
+                cout<<a[i]<<" ";
+            }
+    } else {
+        for(int i=1;i<=k;i++){
+            cout<<i<<" ";
+        }
+    }
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t-->0){
+        int n,k;
+        cin>>n>>k;
+        int a[k];
+        for(int i=1;i<=k;i++){
+            cin>>a[i];
+        }
+        sinh(a,n,k);
+        cout<<endl;
+    }
+    return 0;
+}
