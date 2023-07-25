@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+void thap(int n, char a, char b, char c)
+{
+    if (n == 1)
+    {
+        cout << a << " -> " << c << endl;
+        return;
+    }
+    thap(n - 1, a, c, b);
+    thap(1, a, b, c);
+    thap(n - 1, b, a, c);
+}
+int main()
+{
+    int n;
+    cin >> n;
+    thap(n, 'A', 'B', 'C');
+}
