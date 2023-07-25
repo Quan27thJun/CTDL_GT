@@ -1,0 +1,32 @@
+#include<bits/stdc++.h> 
+using namespace std;
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		long long n,k,ok=0,dem=0;
+		cin>>n>>k;
+		int a[k+1];
+		set<int> s;
+		for(int i =1; i<=k;++i) {
+			cin >> a[i];
+			s.insert(a[i]);
+		}
+		int i=k,val=n;
+		while(a[i]==val&&i>0){
+			val--;
+			i--;
+		}
+		if(i==0) cout<<k;
+		else {
+			a[i]++;
+			dem=s.size();
+			for(int j=i+1;j<=k;++j){
+				a[j]=a[j-1]+1;
+			}
+			for(int j=1;j<=k;++j) s.insert(a[j]);
+			cout<<s.size()-dem;
+		}
+		cout<<endl;
+	}
+}
