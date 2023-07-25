@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t, d;
+    cin >> t;
+    while (t--)
+    {
+        string s;
+        cin >> d >> s;
+        int a[256] = {0};
+        for (int i = 0; i < s.size(); ++i)
+            a[s[i]]++;
+        int maxi = *max_element(a, a + 256);
+        printf(s.size() >= (maxi - 1) * d ? "1\n" : "-1\n");
+    }
+}
