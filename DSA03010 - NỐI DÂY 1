@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n, i, s = 0;
+        cin >> n;
+        multiset<long long> a;
+        for (i = 0; i < n; ++i)
+        {
+            int x;
+            cin >> x;
+            a.insert(x);
+        }
+        while (a.size() > 0)
+        {
+            long long k = (*a.begin() + *++a.begin());
+            s = (s + k);
+            a.erase(a.begin());
+            a.erase(a.begin());
+            if (a.size() > 0)
+                a.insert(k);
+        }
+        cout << s << endl;
+    }
+}
