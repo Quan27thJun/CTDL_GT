@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<string> a;
+void sinh(int n)
+{
+    a.clear();
+    a.push_back("0");
+    a.push_back("1");
+    while (n--)
+    {
+        vector<string> b(a.begin(), a.end()); // tao chuoi b giong chuoi a
+        reverse(a.begin(), a.end());          // ham reverse de tao chuoi nguoc voi chuoi a, VD a=123 thi sau khi reverse se tao chuoi a=321
+        for (auto &x : b)
+            x = "0" + x; // them 0 vao chuoi b(0,1)
+        for (auto &x : a)
+            x = "1" + x; // them 1 vao chuoi a(1,0)
+        for (int i = b.size() - 1; i >= 0; --i)
+            a.insert(a.begin(), b[i]); // noi chuoi b vao dau chuoi a
+    }
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        sinh(n - 1);
+        for (int i = 0; i < pow(2, n); ++i)
+            cout << a[i] << " ";
+        cout << endl;
+    }
+}
