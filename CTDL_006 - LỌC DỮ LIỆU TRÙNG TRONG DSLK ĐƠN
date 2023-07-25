@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+    Node(int x){
+        data=x;
+        next=NULL;
+    } 
+};
+void filterDuplicates(Node* &head) {
+    set<int> res; 
+    Node* c = head;
+    Node* p = nullptr;
+
+    while (c != nullptr) {
+        if (res.find(c->data) != res.end()) {   //find tra ve vi tri con tro neu tim thay va end neu khong tim thay
+            Node* temp = c;
+            c = c->next;
+            if (p != nullptr) {
+                p->next = c;
+            } else {
+                head = c;
+            }
+            delete temp;
+        } else {
+            res.insert(c->data);
+            p = c;
+            c = c->next;
+        }
+    }
+}
+void printList(Node* head) {
+    Node* c = head;
+    while (c != nullptr) {
+        cout << c->data << " ";
+        c = c->next;
+    }
+}
+void append(Node* &head, int x) {
+    Node* newNode = new Node(x);
+    if (head == nullptr) {
+        head = newNode;
+    } else {
+        Node* c = head;
+        while (c->next != nullptr) {
+            c = c->next;
+        }
+        c->next = newNode;
+    }
+}
+int main() {
+    int N;
+    cin >> N;
+    Node* First = nullptr;
+    for (int i = 0; i < N; i++) {
+        int num;
+        cin >> num;
+        append(First, num);
+    }
+    filterDuplicates(First);
+    printList(First);
+    return 0;
+}
