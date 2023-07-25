@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n, k, dem = 0;
+char a[20];
+vector<string> v;
+void in()
+{
+    string s1, s2;
+    for (int i = 0; i < n; ++i)
+        s1 += a[i];
+    for (int i = 0; i < k; ++i)
+        s2 += "A";
+    size_t pos1 = s1.find(s2), pos2 = s1.rfind(s2);
+    if (pos1 != string::npos)
+        if (pos1 == pos2)
+        {
+            ++dem;
+            v.push_back(s1);
+        }
+}
+void sinh(int i)
+{
+    for (int j = 0; j <= 1; ++j)
+    {
+        a[i] = 'A' + j;
+        if (i == n - 1)
+            in();
+        else
+            sinh(i + 1);
+    }
+}
+int main()
+{
+    cin >> n >> k;
+    sinh(0);
+    cout << dem << endl;
+    for (auto x : v)
+        cout << x << endl;
+}
