@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<string> a;
+void sinh(int n)
+{
+    a.push_back("0");
+    a.push_back("1");
+    while (n--)
+    {
+        vector<string> b(a.begin(), a.end());
+        reverse(b.begin(), b.end());
+        for (auto &x : a)
+            x = "0" + x;
+        for (auto &x : b)
+            x = "1" + x;
+        for (auto x : b)
+            a.insert(a.end(), x);
+    }
+}
+int main()
+{
+    int t, n, val;
+    cin >> t;
+    while (t--)
+    {
+        a.clear();
+        string s, res;
+        cin >> s;
+        n = s.size();
+        int chay = n;
+        sinh(n - 1);
+        for (int i = 0; i < pow(2, chay); ++i)
+            if (s == a[i])
+                val = i;
+        for (int i = chay - 1; i >= 0; --i)
+        {
+            int check = val / pow(2, i);
+            if (check)
+            {
+                val -= pow(2, i);
+                res += "1";
+            }
+            else
+                res += "0";
+        }
+        cout << res << endl;
+    }
+}
