@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int X[100], n;
+bool OK = true;
+void nhap(){
+	cin>>n;
+	for(int i=1; i<=n; i++) cin>>X[i];
+	sort(X+1,X+n+1);
+}
+void in(){
+	for(int i=1; i<=n; i++) cout<<X[i]<<" ";
+	cout<<"\n";
+}
+void sinh(){
+	int j = n-1; 
+	while(j>0 && X[j]>X[j+1])
+ 		j--;
+		if ( j > 0){
+			int k = n;
+			while(X[j]>X[k]) 
+ 				k--;
+			swap(X[j],X[k]);
+			int r = j+1, s = n;
+			while (r<=s){		
+				swap(X[r],X[s]);
+				r++; 
+				s--;
+			}
+		} 
+		else
+			OK = false;
+}
+int main(void){
+	nhap(); 
+	while(OK){
+		in(); 
+		sinh(); 
+	}
+}
+
