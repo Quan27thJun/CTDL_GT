@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int n;
+        cin >> n;
+        vector<long long> A(n);
+        for (int i = 0; i < n; i++) {
+            cin >> A[i];
+        }
+        vector<int> temp;
+        
+        for (int i = 0; i < n; i++) {
+            string str = to_string(A[i]);
+            for (char ch : str) {
+                if (find(temp.begin(), temp.end(), ch - '0') == temp.end()) {
+                    temp.push_back(ch - '0');
+                }  
+                
+            }
+        }
+        
+        sort(temp.begin(), temp.end());
+        for (int i = 0; i < temp.size(); i++) {
+            cout << temp[i] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
